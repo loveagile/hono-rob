@@ -1,0 +1,42 @@
+<html>
+
+  <head>
+    <title>Code Generator</title>
+  </head>
+
+  <body>
+    <h1>Code Generator</h1>
+    <p>Enter your prompt below:</p>
+    <input type="text" id="prompt-input" />
+    <button id="generate-button">Generate Code</button>
+    <h2>Generated Code:</h2>
+    <pre id="output"></pre>
+  </body>
+  <script>
+    // Get the "generate-button" and "output" elements
+    const generateButton = document.getElementById('generate-button');
+    const output = document.getElementById('output');
+
+    // Listen for click events on the "generate-button" element
+    generateButton.addEventListener('click', () => {
+      // Send a request to the Cloudflare worker and get the generated code
+      const inputValue = document.getElementById("prompt-input").value;
+      const jsonData = { prompt: inputValue };
+
+
+      fetch('https://appy.c0smic.workers.dev/generate/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: jsonData,
+      })
+        .then(response => response.json())
+        .then(data => {
+          // Display the generated code in the "output" element
+          output.innerHTML = data.code;
+        });
+    });
+  </script>
+
+</html>
