@@ -3,8 +3,11 @@ import { Hono } from 'https://deno.land/x/hono/mod.ts'
 import { cors } from 'https://deno.land/x/hono/middleware.ts'
 import { prettyJSON } from 'https://deno.land/x/hono/middleware.ts'
 import { OpenAI } from 'https://deno.land/x/openai/mod.ts'
+import 'https://deno.land/x/dotenv/load.ts'
 
-const openai = new OpenAI('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')
+const apiKey = Deno.env.get('API_KEY')
+const openai = new OpenAI(apiKey)
+
 // Define a function that generates code based on a text prompt
 async function generateCode(prompt) {
   // Use the OpenAI API to generate code using the davinci model
