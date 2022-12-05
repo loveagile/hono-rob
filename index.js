@@ -48,7 +48,6 @@ app.get('/generate/:input', async (c) => {
 
   // Return the generated code in the response
   return c.json({ code })
-  // return input
 })
 
 // Start the hono server
