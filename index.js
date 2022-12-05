@@ -23,8 +23,6 @@ app.use('*', cors())
 app.use('*', prettyJSON())
 
 // Use a middleware function to ensure that requests have the correct Content-Type
-app.post('/generate', async (c, next) => {})
-
 app.post('*', async (c, next) => {
   if (!c.req.header('Content-Type')?.includes('application/json')) {
     return c.json({ message: `Method not allowed.` }, 405)
